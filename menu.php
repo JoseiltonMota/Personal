@@ -1,80 +1,47 @@
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<ul class="nav navbar-text">
-			<li>Absenteismo Central 3121 <?php
-			if($_SESSION['nivelsession']==1){
-				echo ' - [ADMINISTRATOR]';
-			}
-			?></li>
+ <!-- start: Main Menu -->
+ <div id="sidebar-left" class="span2">
+   <div class="nav-collapse sidebar-nav">
+    <ul class="nav nav-tabs nav-stacked main-menu">
+      <li><a href="index.php?cod=1"><i class="icon-home"></i><span class="hidden-tablet"> Home</span></a></li> 
 
+      <!-- start: Monitoria 1° Nivel 
+      <li>
+        <a class="dropmenu" href="#"><i class="icon-edit"></i><span class="hidden-tablet"> Monitoria 1° Nivel <span class="label label-important"> 2 </span></a>
+        <ul>
+          <li><a class="submenu" href="index.php?cod=3"><i class="icon-file-alt"></i><span class="hidden-tablet"> Telefone</span></a></li>
+          <li><a class="submenu" href="index.php?cod=4"><i class="icon-file-alt"></i><span class="hidden-tablet"> Web</span></a></li>
+        </ul> 
+      </li>
+      end: Monitoria 1° Nivel -->
 
-		</ul>
+      <li>
+        <a href="index.php?cod=5"><i class="icon-edit"></i><span class="hidden-tablet"> Monitoria 2° Nível</span></a>
+      </li>
 
-		<div class="collapse navbar-collapse" id="navigation">		 
-			<ul class="nav navbar-nav navbar-right" style="margin-right: 50px">
+      <!-- start: Consulta monitoria 1° Nivel -->
+      <li>
+        <a class="dropmenu" href="#"><i class="icon-eye-open"></i><span class="hidden-tablet"> Consulta monitoria 1° <span class="label label-important"> 2 </span></a>
+        <ul>
+          <li><a class="submenu" href="index.php?cod=2"><i class="icon-file-alt"></i><span class="hidden-tablet"> Telefone</span></a></li>
+          <li><a class="submenu" href="index.php?cod=6"><i class="icon-file-alt"></i><span class="hidden-tablet"> Web</span></a></li>
+        </ul> 
+      </li>
+      <!-- end: Consulta monitoria 1° Nivel -->
 
+      <li><a href="index.php?cod=7"><i class="icon-eye-open"></i><span class="hidden-tablet"> Consulta monitoria 2°</span></a></li>
 
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="index.php?cod=6">Consulta de Falta</a></li>
-					</ul>
-				</li>
+      <li>
+        <a class="dropmenu" href="#"><i class="icon-font"></i><span class="hidden-tablet"> Cadastro <span class="label label-important"> 3 </span></a>
+        <ul>
+          <li><a class="submenu" href="index.php?cod=8"><i class="icon-file-alt"></i><span class="hidden-tablet">Analista 1° nível</span></a></li>
+          <li><a class="submenu" href="index.php?cod=9"><i class="icon-file-alt"></i><span class="hidden-tablet">Analista 2° nível</span></a></li>
+          <?PHP if ($_SESSION['session_nivel']==1) {
+           echo '<li><a class="submenu" href="index.php?cod=10"><i class="icon-file-alt"></i><span class="hidden-tablet">Monitor(a)</span></a></li>';
+           }  ?>
+       </ul>
+     </li>
 
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="index.php?cod=1">Cadastro de Falta</a></li>
-						<li><a href="index.php?cod=2">Cadastro de Funcionario</a></li>
-						
-						<?php
+   </div>
+ </div>
 
-						if($_SESSION['nivelsession']==1){
-							echo '<li role="separator" class="divider"></li>';
-							echo '<li><a href="index.php?cod=4">Cadastro de Usuário</a></li>';
-							echo '<li><a href="index.php?cod=5">Cadastro de Grupo</a></li>';
-						}
-						?>
-					</ul>
-				</li>
-
-				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfil<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="alterarSenha.php">Alterar Senha</a></li>
-					</ul>
-				</li>
-
-				<li>
-					<button class="btn btn-success navbar-btn btn-circle" href="#myModal" data-toggle="modal">Sair</button>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
-
-<!-- Confirmação -->
-<div class="container">
-	<div class="row">
-		<div id="myModal" class="modal fade in">
-			<div class="modal-dialog">
-				<div class="modal-content">
-
-					<div class="modal-header">
-						<a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-						<h4 class="modal-title">Confirmação</h4>
-					</div>
-					<div class="modal-body">
-						<p>Tem certeza que deseja sair?</p>
-					</div>
-					<div class="modal-footer">
-						<div class="btn-group">
-							<button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancel</button>
-							<a style="text-decoration: none; color: white;" href="logoff.php"><button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>Sim</button></a>
-						</div>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dalog -->
-		</div><!-- /.modal -->
-	</div>
-</div>
+<!-- end: Main Menu -->

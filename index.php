@@ -1,162 +1,178 @@
-﻿<html lang="pt-br">
+<?php include_once("controller/verifica.php"); ?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-	<meta http-equiv="Content-Type" charset="iso-8859-1" />
-	<link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
-	<script type="text/javascript"> // Obrigando letra em Maisculo
-	function toUpper() {
-		// Transformando em maiusculo
-		nomeGrupo = document.getElementById("grupo");
-		nomeGrupo.value = nomeGrupo.value.toUpperCase();
-	}
-</script> <!-- Fim Letra Maisculo-->
+  <!-- start: Meta -->
+  <meta charset="utf-8">
+  <title>SQM - Sistema de Monitoria</title>
+  <meta name="description" content="Bootstrap Metro Dashboard">
+  <meta name="author" content="Dennis Ji">
+  <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <!-- end: Meta -->
+  
+  <!-- start: Mobile Specific -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- end: Mobile Specific -->
+  
+  <!-- start: CSS -->
+  <link id="bootstrap-style" href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+  <link id="base-style" href="css/style.css" rel="stylesheet">
+  <link id="base-style-responsive" href="css/style-responsive.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css'>
+  <!-- end: CSS -->
 
-<script language="JavaScript"> //Inicio Validação da Data 
+  <!-- ABOUT US 
+  <link rel="stylesheet" type="text/css"  href="tf-free-no.3/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="tf-free-no.3/fonts/font-awesome/css/font-awesome.css"> -->
 
+  
 
-function VerificaData(digData) {
-	var bissexto = 0;
-	var data = digData;
-	var tam = data.length;
+  <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <link id="ie-style" href="css/ie.css" rel="stylesheet">
+    <![endif]-->
 
-	if (tam == 10) 	{
+  <!--[if IE 9]>
+    <link id="ie9style" href="css/ie9.css" rel="stylesheet">
+    <![endif]-->
+    
+    <!-- start: Favicon -->
+    <link rel="shortcut icon" href="img/favicon.gif">
+    <!-- end: Favicon -->    
+  </head>
 
-		var dia = data.substr(0,2); 
-		var mes = data.substr(3,2);
-		var ano = data.substr(6,4);
+  <body>
 
-		if ((ano > 1900) || (ano < 2100)){
-			switch (mes){
-				case '01':
-				case '03':
-				case '05':
-				case '07':
-				case '08':
-				case '10':
-				case '12':
-				
-				if  (dia <= 31){
-					return true;
-				} break	
+    <?php include_once("conexao/conecta.php");?> 
 
-				case '04':
-				case '06':
-				case '09':
-				case '11':
-				
-				if  (dia <= 30){
-					return true;
-				} break
+    <!-- start: Header -->
+    <?php include("navbar.php");?>
+    <!-- start: Header -->
 
-				case '02':
-				/* Validando ano Bissexto / fevereiro / dia */
-				if ((ano % 4 == 0) || (ano % 100 == 0) || (ano % 400 == 0)){
-					bissexto = 1;
-				}
-				if ((bissexto == 1) && (dia <= 29)){
-					return true;
-				}
-				if ((bissexto != 1) && (dia <= 28)){
-					return true;
-				} break
-			}
-		}
-	}
+    <div class="container-fluid-full">
+      <div class="row-fluid">
 
-	else {
-		alert("O formato de data inserido é inválido!");
-		return false;
-	}
-}
-</script> <!-- Fim Validação data-->
+       <!-- start: Main Menu -->
+       <?php include_once("menu.php");?>
+       <!-- end: Main Menu -->
 
-<!-- Incluindo o jQuery que é requisito do JavaScript do Bootstrap --> 
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
+       <?php
+    // Se "cod" tiver algum valor e se existir
+       if ((isset($_GET['cod'])) and !(empty($_GET['cod']))){
+        switch($_GET['cod']){
 
-<!-- Incluindo o JavaScript do Bootstrap --> 
-<script src="bootstrap/dist/js/bootstrap.min.js"></script> 
+          case 1: {include_once('home.php');}
+          break;
 
+          case 2: {include_once('consulta_tel.php');}
+          break;
 
-<script src="jquery-ui/jquery-ui.js"></script>
+          case 3: {include_once('monitoria_tel.php');}
+          break;
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<link href="bootstrap/dist/css/bootstrap-chosen.css" rel="stylesheet" media="screen">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
-<script>
+          case 4: {include_once('monitoria_web.php');}
+          break; 
 
-$(function() {
-	$('.chosen-select').chosen();
-	$('.chosen-select-deselect').chosen({ allow_single_deselect: true });
-});
-</script>
-<title>Absenteismo 3121</title>
-<style>
-.modal .modal-header .btn{
-	position: absolute;
-	top: 0;
-	border-bottom-right-radius: 0;
-	border-top-left-radius: 0;
-	margin-top: 0;
-	right: 0;
-}
-</style>
-</head>
+          case 5: {include_once('monitoria_2n.php');}
+          break;
 
+          case 6: {include_once('consulta_web.php');}
+          break;
 
+          case 7: {include_once('consulta_mon2n.php');}
+          break;
 
-<body>
+          case 8: {include_once('cadastro_analista1n.php');}
+          break;
 
-	<?php include_once("controller/veri.php"); ?>
+          case 9: {include_once('cadastro_analista2n.php');}
+          break;
 
-	<?php
-// Chamando o menu
-	require_once('menu.php'); 
-	?>
+          case 10: {include_once('cadastro_monitor.php');}
+          break;
 
-	<div style="position: absolute">
-		<img src="img/logo-banco-nordeste.png" style="margin-left: 10px; padding-top: 0px;" class="img-responsive" alt="Cinque Terre" width="200" height="150"> 
-	</div>
+          case 11: {include_once('view/AlterarPerfilMonitor.php');}
+          break;
 
-	<div >
-		<img src="img/stefanini.png" style="float: right; margin-right: 10px; padding-top: 0px;" class="img-responsive"> 
-	</div>
+          case 12: {include_once('view/EditarMonitoria.php');}
+          break;
 
-	<?php
+          default: {header("Location: login.php");}
+          break;
+        }
+      } else {
+        include_once('home.php');
+      }
 
-// Se "cod" tiver algum valor e se existir
-	if ((isset($_GET['cod'])) and !(empty($_GET['cod']))){
-		switch($_GET['cod']){
-			case 1: {include_once('view/cadastro/cadastroFalta.php');}
-			break;
+      ?>
 
-			case 2: {include_once('view/cadastro/cadastroFuncionario.php');}
-			break;
+      <footer>
+        <p>
+          <span style="text-align:left;float:left">&copy; SQM 2016 - Todos os direitos reservados</a></span>
+        </p>
+      </footer>
 
-		 //case 3: {include_once('login.php');}
-		 //break;
+      <!-- start: JavaScript-->
 
-			case 4: {include_once('view/cadastro/cadastroUsuario.php');}
-			break;
+      <script src="js/jquery-1.9.1.min.js"></script>
+      <script src="js/jquery-migrate-1.0.0.min.js"></script>
 
-			case 5: {include_once('view/cadastro/cadastroGrupo.php');}
-			break;
+      <script src="js/jquery-ui-1.10.0.custom.min.js"></script>
 
-			case 6: {include_once('view/consulta/consultaFalta.php');}
-			break;
+      <script src="js/jquery.ui.touch-punch.js"></script>
 
-			case 7: {include_once('view/consulta/consultaFuncionario.php');}
-			break;
+      <script src="js/modernizr.js"></script>
 
-			default: {header("Location: signin/login.php");}
-			break;
-		}
-	} else {
-		include_once('view/cadastro/cadastroFalta.php');
-	}
+      <script src="js/bootstrap.min.js"></script>
 
-	?>
+      <script src="js/jquery.cookie.js"></script>
 
-</body>
-</html>
+      <script src='js/fullcalendar.min.js'></script>
 
+      <script src='js/jquery.dataTables.min.js'></script>
+
+      <script src="js/excanvas.js"></script>
+      <script src="js/jquery.flot.js"></script>
+      <script src="js/jquery.flot.pie.js"></script>
+      <script src="js/jquery.flot.stack.js"></script>
+      <script src="js/jquery.flot.resize.min.js"></script>
+
+      <script src="js/jquery.chosen.min.js"></script>
+
+      <script src="js/jquery.uniform.min.js"></script>
+
+      <script src="js/jquery.cleditor.min.js"></script>
+
+      <script src="js/jquery.noty.js"></script>
+
+      <script src="js/jquery.elfinder.min.js"></script>
+
+      <script src="js/jquery.raty.min.js"></script>
+
+      <script src="js/jquery.iphone.toggle.js"></script>
+
+      <script src="js/jquery.uploadify-3.1.min.js"></script>
+
+      <script src="js/jquery.gritter.min.js"></script>
+
+      <script src="js/jquery.imagesloaded.js"></script>
+
+      <script src="js/jquery.masonry.min.js"></script>
+
+      <script src="js/jquery.knob.modified.js"></script>
+
+      <script src="js/jquery.sparkline.min.js"></script>
+
+      <script src="js/counter.js"></script>
+
+      <script src="js/retina.js"></script>
+
+      <script src="js/custom.js"></script>
+      <!-- end: JavaScript-->
+
+    </body>
+    </html>
